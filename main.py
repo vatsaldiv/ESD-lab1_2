@@ -52,13 +52,16 @@ def UpdateDB_Thread():
         current_datetime = current_date + "_" + current_time
 
         sleep(loopTimeInSeconds)
-
        
 def OpenView_Thread():
     app = QtWidgets.QApplication([])
     application = mywindow()
+    timer = QTimer()
+    timer.timeout.connect(application.updateInterface)
+    timer.start(1000)
     application.show()
-    sys.exit(app.exec())
+    app.exec_()
+    application.populate()
 '''
 def UpdateGUI_Thread():
     sleep (5)

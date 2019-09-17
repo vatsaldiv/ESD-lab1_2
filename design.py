@@ -2,6 +2,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 from utilities import *
+from PyQt5.QtCore import QTimer
+from PyQt5.QtWidgets import QApplication
 
  
 class Ui_MainWindow(object):
@@ -205,6 +207,7 @@ class Ui_MainWindow(object):
 
     def updateGUI(self,index):
         _translate = QtCore.QCoreApplication.translate
+        
         self.textBrowser_1_1.setText(_translate("MainWindow", str(getLastData()[0]) ))
         self.textBrowser_1_2.setText(_translate("MainWindow", str(findAvg()[0]) ))
         self.textBrowser_1_3.setText(_translate("MainWindow", "" ))
