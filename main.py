@@ -7,8 +7,8 @@ import serial
 import threading
 import os
 
-loopTimeInSeconds = 5
-
+loopTimeInSeconds = 120
+'''
 #View Class
 class mywindow(QtWidgets.QMainWindow):
     def __init__(self):
@@ -59,35 +59,34 @@ def OpenView_Thread():
     application = mywindow()
     application.show()
     sys.exit(app.exec())
-'''
+
 def UpdateGUI_Thread():
     sleep (5)
     mywindow().updateInterface()
-'''
+
 #Threads to call the 2 methods
 thread1 = threading.Thread(target = UpdateDB_Thread, args = ())
 thread1.start()
 
 thread2 = threading.Thread(target = OpenView_Thread,args=())
 thread2.start()
-'''
+
 thread3 = threading.Thread(target = UpdateGUI_Thread,args=())
 thread3.start()
 '''
 
-'''
-ser = serial.Serial(port='COM15', baudrate=115200)
 
-bytes_data = ser.read(size = 3)
-print(bytes_data)
+ser = serial.Serial(port='COM16', baudrate=9600)
 
-encoding = 'utf-8'
-sting_data = str(bytes_data, encoding)
-print(string_data)
+while True:
+    bytes_data = ser.read(3)
+    last_count = int.from_bytes([bytes_data[0]], byteorder='big', signed=False)
+    print(last_count)
+    last_light = int.from_bytes([bytes_data[1]], byteorder='big', signed=False)
+    print(last_light)
+    last_temp = int.from_bytes([bytes_data[2]], byteorder='big', signed=False)
+    print(last_temp)
+    
+    #ser.write('a')
 
-values = string_data.strip().split(',')
-last_count, last_light, last_temp = [str(s) for s in values]
-
-ser.write('a')
-'''
-
+    #sleep(loopTimeInSeconds)
