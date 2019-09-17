@@ -3,7 +3,6 @@ import csv
 import os
 import urllib.request
 from datetime import date,time,datetime
-import serial
 
 '''
 last_count = 0

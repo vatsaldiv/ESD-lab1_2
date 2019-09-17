@@ -3,6 +3,7 @@ from design import *
 from datetime import date,time,datetime
 from time import sleep
 import serial
+import sys
 
 '''
 ser = serial.Serial(port='COM15', baudrate=115200)
@@ -32,8 +33,6 @@ while True:
     current_time = now.strftime("%H:%M:%S")
     current_datetime = current_date + "_" + current_time
 
-
-
     updateDB(last_count, last_temp, last_light, current_datetime)
 
     class mywindow(QtWidgets.QMainWindow):
@@ -51,10 +50,15 @@ while True:
     application = mywindow()
 
     application.show()
-    sys.exit(app.exec())
+    #sys.exit(app.exec())
+    app.exec()
 
     last_count += 1
     last_light += 1
     last_temp += 1
+
+    print(last_count)
+    print(last_temp)
+    print(last_light)
 
     sleep(10)
