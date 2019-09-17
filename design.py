@@ -140,7 +140,8 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "ESD lab 1"))
+        MainWindow.setWindowIcon(QtGui.QIcon("icon.png"))
         self.label_1_1.setText(_translate("MainWindow", "Current Temperature"))
         self.label_1_2.setText(_translate("MainWindow", "Average Temperature for the whole day"))
         self.label_2_1.setText(_translate("MainWindow", "Current Light Intensity"))
