@@ -207,7 +207,6 @@ class Ui_MainWindow(object):
 
     def updateGUI(self,index):
         _translate = QtCore.QCoreApplication.translate
-        
         self.textBrowser_1_1.setText(_translate("MainWindow", str(getLastData()[0]) ))
         self.textBrowser_1_2.setText(_translate("MainWindow", str(findAvg()[0]) ))
         self.textBrowser_1_3.setText(_translate("MainWindow", "" ))

@@ -15,14 +15,12 @@ class mywindow(QtWidgets.QMainWindow):
         super(mywindow, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        #self.ui.updateGUI(self)
 
     def updateInterface(self):
         self.ui.updateGUI(self)
 
 #Function Definations
 def UpdateDB_Thread():
-    #count = getLastCount()
     last_count = 1
     last_light = 20.3
     last_temp = 25.2
@@ -61,36 +59,10 @@ def OpenView_Thread():
     timer.start(1000)
     application.show()
     app.exec_()
-    application.populate()
-'''
-def UpdateGUI_Thread():
-    sleep (5)
-    mywindow().updateInterface()
-'''
+
 #Threads to call the 2 methods
 thread1 = threading.Thread(target = UpdateDB_Thread, args = ())
 thread1.start()
 
 thread2 = threading.Thread(target = OpenView_Thread,args=())
 thread2.start()
-'''
-thread3 = threading.Thread(target = UpdateGUI_Thread,args=())
-thread3.start()
-'''
-
-'''
-ser = serial.Serial(port='COM15', baudrate=115200)
-
-bytes_data = ser.read(size = 3)
-print(bytes_data)
-
-encoding = 'utf-8'
-sting_data = str(bytes_data, encoding)
-print(string_data)
-
-values = string_data.strip().split(',')
-last_count, last_light, last_temp = [str(s) for s in values]
-
-ser.write('a')
-'''
-

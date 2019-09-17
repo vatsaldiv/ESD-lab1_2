@@ -5,11 +5,6 @@ import urllib.request
 from datetime import date,time,datetime
 import serial
 
-'''
-last_count = 0
-last_temp = 0.0
-last_light = 0.0
-'''
 
 today = date.today()
 now = datetime.now()
@@ -34,13 +29,13 @@ def updateDB(last_count, last_temp, last_light, current_datetime):
         writer = csv.writer(csvFile, dialect='myDialect')
         writer.writerow(row)
     csvFile.close()
-'''
-    url = "https://us-central1-esd-lab1.cloudfunctions.net/setData?count="+count+"&data1="+last_temp+"&data2="+last_light+"&data3="+current_datetime
+
+    url = "https://us-central1-esd-lab1.cloudfunctions.net/setData?count="+str(last_count)+"&data1="+str(last_temp)+"&data2="+str(last_light)+"&data3="+str(current_datetime)
 
     with urllib.request.urlopen(url) as response:
         response_text = response.read()
         print(response_text.decode("utf-8"))
-'''
+
 
 
 def findAvg():
@@ -106,18 +101,3 @@ def getLastData():
 
     csvFile.close()
     return data
-
-def getLastCount():
-    count=0
-    exists = os.path.isfile('data.csv')
-    if not exists:
-        return 0
-
-    with open('data.csv', 'r') as csvFile:
-        reader = csv.reader(csvFile)
-        for row in reader:
-            count = row[0]
-
-    csvFile.close()
-    return int(count)
-
