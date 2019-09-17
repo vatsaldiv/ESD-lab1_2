@@ -213,6 +213,9 @@ class Ui_MainWindow(object):
         self.textBrowser_2_1.setText(_translate("MainWindow", str(getLastData()[1]) ))
         self.textBrowser_2_2.setText(_translate("MainWindow", str(findAvg()[1]) ))
         self.textBrowser_2_3.setText(_translate("MainWindow", "" ))
+        self.onSelected_1_3(self)
+        self.onSelected_2_3(self)
+
 
     def onSelected_1_3(self,index):
         _translate = QtCore.QCoreApplication.translate

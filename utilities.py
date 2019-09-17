@@ -29,13 +29,13 @@ def updateDB(last_count, last_temp, last_light, current_datetime):
         writer = csv.writer(csvFile, dialect='myDialect')
         writer.writerow(row)
     csvFile.close()
-
+    
     url = "https://us-central1-esd-lab1.cloudfunctions.net/setData?count="+str(last_count)+"&data1="+str(last_temp)+"&data2="+str(last_light)+"&data3="+str(current_datetime)
 
     with urllib.request.urlopen(url) as response:
         response_text = response.read()
         print(response_text.decode("utf-8"))
-
+    
 
 
 def findAvg():
