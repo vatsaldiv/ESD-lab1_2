@@ -66,7 +66,6 @@ def findAvg():
     avg_light = round(avg_light, 8)
     return avg_temp, avg_light
 
-
 def findAvg_hrs(hour):
     avg_temp_hrs = 0.0
     avg_light_hrs = 0.0
@@ -90,3 +89,18 @@ def findAvg_hrs(hour):
     avg_temp_hrs = round(avg_temp_hrs, 8)
     avg_light_hrs = round(avg_light_hrs, 8)
     return avg_temp_hrs, avg_light_hrs
+
+def getLastCount():
+    count=0
+    exists = os.path.isfile('data.csv')
+    if not exists:
+        return 0
+
+    with open('data.csv', 'r') as csvFile:
+        reader = csv.reader(csvFile)
+        for row in reader:
+            count = row[1]
+
+    csvFile.close()
+    return int(count)
+
