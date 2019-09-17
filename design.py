@@ -2,6 +2,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 from utilities import *
+from PyQt5.QtCore import QTimer
+from PyQt5.QtWidgets import QApplication
 
  
 class Ui_MainWindow(object):
@@ -223,4 +225,3 @@ class Ui_MainWindow(object):
         i = self.comboBox_2_3.currentText()[:2]
         var = findAvg_hrs(str(i))[1]
         self.textBrowser_2_3.setText(_translate("MainWindow", str(var) ))
-
