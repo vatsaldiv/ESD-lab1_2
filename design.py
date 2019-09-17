@@ -204,6 +204,8 @@ class Ui_MainWindow(object):
         self.textBrowser_2_3.setText(_translate("MainWindow", "" ))
         self.comboBox_1_3.currentTextChanged.connect(self.onSelected_1_3)
         self.comboBox_2_3.currentTextChanged.connect(self.onSelected_2_3)
+        self.onSelected_1_3(self)
+        self.onSelected_2_3(self)
 
     def updateGUI(self,index):
         _translate = QtCore.QCoreApplication.translate
