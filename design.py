@@ -194,21 +194,23 @@ class Ui_MainWindow(object):
         self.comboBox_2_3.setItemText(23, _translate("MainWindow", "22-23"))
         self.comboBox_2_3.setItemText(24, _translate("MainWindow", "23-00"))
         self.label.setText(_translate("MainWindow", "Room Condition Monitoring System"))
-        
+        self.textBrowser_1_1.setText(_translate("MainWindow", str(getLastData()[0]) ))
         self.textBrowser_1_2.setText(_translate("MainWindow", str(findAvg()[0]) ))
         self.textBrowser_1_3.setText(_translate("MainWindow", "" ))
-
+        self.textBrowser_2_1.setText(_translate("MainWindow", str(getLastData()[1]) ))
         self.textBrowser_2_2.setText(_translate("MainWindow", str(findAvg()[1]) ))
         self.textBrowser_2_3.setText(_translate("MainWindow", "" ))
         self.comboBox_1_3.currentTextChanged.connect(self.onSelected_1_3)
         self.comboBox_2_3.currentTextChanged.connect(self.onSelected_2_3)
 
-    def getData(self, MainWindow ,last_temp,last_light):
+    def updateGUI(self,index):
         _translate = QtCore.QCoreApplication.translate
-        self.textBrowser_1_1.setText(_translate("MainWindow", str(last_temp) ))
-        self.textBrowser_2_1.setText(_translate("MainWindow", str(last_light) ))
-
-
+        self.textBrowser_1_1.setText(_translate("MainWindow", str(getLastData()[0]) ))
+        self.textBrowser_1_2.setText(_translate("MainWindow", str(findAvg()[0]) ))
+        self.textBrowser_1_3.setText(_translate("MainWindow", "" ))
+        self.textBrowser_2_1.setText(_translate("MainWindow", str(getLastData()[1]) ))
+        self.textBrowser_2_2.setText(_translate("MainWindow", str(findAvg()[1]) ))
+        self.textBrowser_2_3.setText(_translate("MainWindow", "" ))
 
     def onSelected_1_3(self,index):
         _translate = QtCore.QCoreApplication.translate

@@ -1,15 +1,13 @@
 from PyQt5 import QtCore
 from design import *
+from utilities import *
 from datetime import date,time,datetime
 from time import sleep
 import serial
 import threading
 import os
 
-loopTimeInSeconds = 10
-
-
-
+loopTimeInSeconds = 5
 
 #View Class
 class mywindow(QtWidgets.QMainWindow):
@@ -17,10 +15,10 @@ class mywindow(QtWidgets.QMainWindow):
         super(mywindow, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        #self.ui.getData(self,last_temp,last_light)
+        #self.ui.updateGUI(self)
 
-    def updateView(self):
-        self.ui.retranslateUi(self)
+    def updateInterface(self):
+        self.ui.updateGUI(self)
 
 #Function Definations
 def UpdateDB_Thread():
@@ -61,15 +59,21 @@ def OpenView_Thread():
     application = mywindow()
     application.show()
     sys.exit(app.exec())
-
-    
+'''
+def UpdateGUI_Thread():
+    sleep (5)
+    mywindow().updateInterface()
+'''
 #Threads to call the 2 methods
 thread1 = threading.Thread(target = UpdateDB_Thread, args = ())
 thread1.start()
 
 thread2 = threading.Thread(target = OpenView_Thread,args=())
 thread2.start()
-
+'''
+thread3 = threading.Thread(target = UpdateGUI_Thread,args=())
+thread3.start()
+'''
 
 '''
 ser = serial.Serial(port='COM15', baudrate=115200)

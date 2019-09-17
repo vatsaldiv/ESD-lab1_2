@@ -90,6 +90,23 @@ def findAvg_hrs(hour):
     avg_light_hrs = round(avg_light_hrs, 8)
     return avg_temp_hrs, avg_light_hrs
 
+def getLastData():
+    current_date = today.strftime("%d/%m/%Y")
+    exists = os.path.isfile('data.csv')
+    data = 0.0, 0.0
+    if not exists:
+        return 0.0, 0.0
+
+    with open('data.csv', 'r') as csvFile:
+        reader = csv.reader(csvFile)
+        for row in reader:
+            data_date = row[3][:10]
+            if data_date == current_date:
+                data = float(row[1]), float(row[2])
+
+    csvFile.close()
+    return data
+
 def getLastCount():
     count=0
     exists = os.path.isfile('data.csv')
@@ -99,7 +116,7 @@ def getLastCount():
     with open('data.csv', 'r') as csvFile:
         reader = csv.reader(csvFile)
         for row in reader:
-            count = row[1]
+            count = row[0]
 
     csvFile.close()
     return int(count)
