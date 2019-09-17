@@ -11,7 +11,6 @@ last_count = 0
 last_light = 0.0
 last_temp = 0.0
 
-isViewOpen = False
 
 #View Class
 class mywindow(QtWidgets.QMainWindow):
