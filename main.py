@@ -7,9 +7,10 @@ import serial
 import threading
 import os
 
-ser = serial.Serial(port='COM16', baudrate=9600)
+ser = serial.Serial(port='COM17', baudrate=9600)
+ser.write('U'.encode())
 
-loopTimeInSeconds = 5
+#loopTimeInSeconds = 5
 
 
 #View Class
@@ -39,11 +40,15 @@ def UpdateDB_Thread():
         last_count = int.from_bytes([bytes_data[0]], byteorder='big', signed=False)
         print(last_count)
         last_light = int.from_bytes([bytes_data[1]], byteorder='big', signed=False)
+        last_light = 255-last_light
+        last_light = round(last_light, 2)
         print(last_light)
         last_temp = int.from_bytes([bytes_data[2]], byteorder='big', signed=False)
+        last_temp = last_temp*(85/172)
+        last_temp = round(last_temp, 2)
         print(last_temp)
 
-        #ser.write('a')
+        ser.write('U'.encode())
 
         #sleep(loopTimeInSeconds)
 

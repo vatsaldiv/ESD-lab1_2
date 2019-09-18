@@ -14,28 +14,37 @@ current_time = now.strftime("%H:%M:%S")
 current_datetime = current_date + "_" + current_time
 
 def updateDB(last_count, last_temp, last_light, current_datetime):
+    row_top = ['count', 'last_temp', 'last_light', 'last_datetime']
     row = [last_count, last_temp, last_light, current_datetime]
     csv.register_dialect('myDialect', lineterminator = '\n')
     exists = os.path.isfile('data.csv')
 
     if not exists:
-        row_top = ['count', 'last_temp', 'last_light', 'last_datetime']
         with open('data.csv', 'w') as csvFile:
             writer = csv.writer(csvFile, dialect='myDialect')
             writer.writerow(row_top)
         csvFile.close()
 
+    if exists:
+        csv_size = os.stat('data.csv').st_size
+        if csv_size > : 1048576
+            os.remove('data.csv')
+            with open('data.csv', 'w') as csvFile:
+                writer = csv.writer(csvFile, dialect='myDialect')
+                writer.writerow(row_top)
+            csvFile.close()
+
     with open('data.csv', 'a') as csvFile:
         writer = csv.writer(csvFile, dialect='myDialect')
         writer.writerow(row)
     csvFile.close()
-
+    
     url = "https://us-central1-esd-lab1.cloudfunctions.net/setData?count="+str(last_count)+"&data1="+str(last_temp)+"&data2="+str(last_light)+"&data3="+str(current_datetime)
 
     with urllib.request.urlopen(url) as response:
         response_text = response.read()
         print(response_text.decode("utf-8"))
-
+    
 def findAvg():
     avg_temp = 0.0
     avg_light = 0.0
@@ -55,8 +64,8 @@ def findAvg():
                 avg_temp /= count
                 avg_light /= count
     csvFile.close()
-    avg_temp = round(avg_temp, 8)
-    avg_light = round(avg_light, 8)
+    avg_temp = round(avg_temp, 2)
+    avg_light = round(avg_light, 2)
     return avg_temp, avg_light
 
 def findAvg_hrs(hour):
@@ -79,8 +88,8 @@ def findAvg_hrs(hour):
                 avg_temp_hrs /= count
                 avg_light_hrs /= count
     csvFile.close()
-    avg_temp_hrs = round(avg_temp_hrs, 8)
-    avg_light_hrs = round(avg_light_hrs, 8)
+    avg_temp_hrs = round(avg_temp_hrs, 2)
+    avg_light_hrs = round(avg_light_hrs, 2)
     return avg_temp_hrs, avg_light_hrs
 
 def getLastData():
